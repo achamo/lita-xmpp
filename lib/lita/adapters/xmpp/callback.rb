@@ -29,7 +29,7 @@ module Lita
             Lita.logger.info mucuser.inspect
             jid = mucuser.items.first.jid.bare
             Lita.logger.info mucuser.class.inspect
-            Lita.logger.info jid.inspect
+            Lita.logger.info jid.to_s
             Lita.logger.info "============================="
           end
           muc.on_message do |time, nick, text|
