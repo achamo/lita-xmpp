@@ -35,7 +35,7 @@ module Lita
               next
             else
               user = user_by_name(nick)
-              source = Source.new(user, muc.jid.bare.to_s)
+              source = Source.new(user, room: muc.jid.bare.to_s)
               message = Message.new(robot, text, source)
               Lita.logger.debug(
                 "Dispatching message to Lita from #{user.id} in MUC #{muc.jid}."
