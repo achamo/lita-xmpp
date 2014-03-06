@@ -27,7 +27,7 @@ module Lita
           muc.add_join_callback do |j|
             nick = j.from.resource
             mucuser = j.first_element('x')
-            if mucuser.kind_of? Jabber::MUCUser
+            if mucuser.kind_of? Jabber::MUC::XMUCUser
               jid = mucuser.items.first.jid.bare.to_s
               User.create(jid, name: nick)
             end
