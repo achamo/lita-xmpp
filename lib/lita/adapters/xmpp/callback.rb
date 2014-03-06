@@ -23,8 +23,9 @@ module Lita
         end
 
         def muc_message(muc)
-          muc.add_join_callback do |join|
-            puts join.inspect
+          muc.add_join_callback do |j|
+            puts j.inspect
+            puts "============================="
           end
           muc.on_message do |time, nick, text|
             if time.is_a?(Time) && time < @start_time
@@ -46,7 +47,7 @@ module Lita
           roster.add_update_callback do |old_item, item|
             jid = item.attributes["jid"]
             Lita.logger.debug("Updating record for user with ID: #{jid}.")
-            create_user(item.attributes)
+#  create_user(item.attributes)
           end
         end
 
