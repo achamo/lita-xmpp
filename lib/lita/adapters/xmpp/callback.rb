@@ -27,8 +27,7 @@ module Lita
             Lita.logger.info j.inspect
             mucuser = j.first_element('x')
             Lita.logger.info mucuser.inspect
-            jid = mucuser.body
-            Lita.logger.info jid.inspect
+            Lita.logger.info mucuser.class.inspect
             Lita.logger.info "============================="
           end
           muc.on_message do |time, nick, text|
