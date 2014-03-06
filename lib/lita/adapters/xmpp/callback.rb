@@ -24,14 +24,10 @@ module Lita
 
         def muc_message(muc)
           muc.add_join_callback do |j|
-            Lita.logger.info j.inspect
             nick = j.from.resource
             mucuser = j.first_element('x')
-            Lita.logger.info mucuser.inspect
             jid = mucuser.items.first.jid.bare.to_s
-            Lita.logger.info mucuser.class.inspect
-            Lita.logger.info "#{nick} as #{jid}"
-            Lita.logger.info "============================="
+            User.create(jid, name: nick)
           end
           muc.on_message do |time, nick, text|
             if time.is_a?(Time) && time < @start_time
