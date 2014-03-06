@@ -35,7 +35,7 @@ module Lita
               Lita.logger.debug "#{time} < #{@start_time} Skipping #{nick}: #{text}"
               next
             else
-              user = user_by_name(nick)
+              user = User.find_by_name(nick)
               Lita.logger.info user.inspect
               Lita.logger.info "------------------"
               source = Source.new(user: user, room: muc.jid.bare.to_s)
