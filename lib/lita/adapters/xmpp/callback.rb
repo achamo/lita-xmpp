@@ -27,8 +27,10 @@ module Lita
           muc.add_join_callback do |j|
             nick = j.from.resource
             mucuser = j.first_element('x')
-            jid = mucuser.items.first.jid.bare.to_s
-            User.create(jid, name: nick)
+            if mucuser.kind_of? Jabber::MUCUser
+              jid = mucuser.items.first.jid.bare.to_s
+              User.create(jid, name: nick)
+            end
           end
           muc.on_message do |time, nick, text|
             if time.is_a?(Time) && time < @start_time
