@@ -24,8 +24,8 @@ module Lita
 
         def muc_message(muc)
           muc.add_join_callback do |j|
-            puts j.inspect
-            puts "============================="
+            Lita.logger.info j.inspect
+            Lita.logger.info "============================="
           end
           muc.on_message do |time, nick, text|
             if time.is_a?(Time) && time < @start_time
