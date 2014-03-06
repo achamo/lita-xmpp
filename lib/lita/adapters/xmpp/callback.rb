@@ -33,6 +33,7 @@ module Lita
             end
           end
           muc.on_message do |time, nick, text|
+            next if nick == robot.name
             if time.is_a?(Time) && time < @start_time
               Lita.logger.debug "#{time} < #{@start_time} Skipping #{nick}: #{text}"
               next
