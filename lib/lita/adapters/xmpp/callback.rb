@@ -25,6 +25,8 @@ module Lita
         def muc_message(muc)
           muc.add_join_callback do |j|
             Lita.logger.info j.inspect
+            mucuser = j.first_element('x')
+            Lita.logger.info mucuser.inspect
             Lita.logger.info "============================="
           end
           muc.on_message do |time, nick, text|
