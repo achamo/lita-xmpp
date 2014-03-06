@@ -23,6 +23,9 @@ module Lita
         end
 
         def muc_message(muc)
+          muc.add_join_callback do |join|
+            puts join.inspect
+          end
           muc.on_message do |time, nick, text|
             if time.is_a?(Time) && time < @start_time
               Lita.logger.debug "#{time} < #{@start_time} Skipping #{nick}: #{text}"
@@ -54,7 +57,11 @@ module Lita
         end
 
         def create_user(user_data)
-          name = user_data['name'].downcase.gsub(/\s+/, '.')
+          if user_data['name'].nil?
+            name = user_data["jid"]
+          else
+            name = user_data['name'].downcase.gsub(/\s+/, '.')
+          end
           User.create(
             user_data["jid"],
             name: name,
